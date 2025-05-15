@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ member.name }}'s Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="{{ url_for('static', filename='member.css') }}" rel="stylesheet"> <!-- Link to external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Header -->
+        <h1>{{ member.name }}</h1>
+        <img src="{{ url_for('static', filename=member.image) }}" class="img-fluid rounded-circle profile-image" alt="{{ member.name }}">
+        <h3>{{ member.role }}</h3>
+        
+        <!-- Professional Summary -->
+        <h4 class="section-title">Professional Summary</h4>
+        <p>{{ member.bio }}</p>
+
+        <!-- Contact Information -->
+        <h4 class="section-title">Contact Information</h4>
+        <ul class="contact-info">
+            <li><strong>Email:</strong> {{ member.email }}</li>
+        </ul>
+
+        <!-- Skills Section -->
+        <h4 class="section-title">Skills</h4>
+        <ul class="skills">
+            {% for skill in member.skills %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Social Media Links -->
+        <h4 class="section-title">Connect</h4>
+        <ul class="social-links">
+            {% if member.linkedin %}
+            <li><a href="{{ member.linkedin }}"><i class="bi bi-linkedin"></i></a></li>
+            {% endif %}
+            {% if member.github %}
+            <li><a href="{{ member.github }}"><i class="bi bi-github"></i></a></li>
+            {% endif %}
+        </ul>
+
+        <!-- Back Button -->
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Team</a>
+    </div>
+    
+    <!-- FontAwesome Icons for Social Links -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
